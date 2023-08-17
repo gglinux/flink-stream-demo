@@ -5,6 +5,14 @@ package spendreport;
  * @description: TODO 类描述
  * @author: jiaweiguo
  * @date: 2023/8/9
+ *
+ * 将输入数据转换为UserVisit对象，并根据userId进行分组。
+ * 接下来，我们使用VisitCountWithTimerProcessFunction处理函数来计算每个用户的访问次数，并在访问次数达到阈值时输出警告信息。
+ * 同时，我们还会使用定时器在访问次数达到阈值后的10秒内，如果没有新的访问事件，则重置计数。
+ * VisitCountWithTimerProcessFunction继承自KeyedProcessFunction，并实现了processElement和onTimer方法。
+ * 在processElement方法中，我们使用ValueState来存储和更新用户的访问次数，并使用定时器来设置重置计数的时间。
+ * 在onTimer方法中，我们根据定时器的触发时间来重置访问。
+ *
  **/
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.state.ValueState;
